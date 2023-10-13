@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build -watch --configuration development",
+    "predeploy": "npm run build -- --base-href 'https://stephane78150.github.io/angular-level-2-cert/'",
+    "deploy": "gh-pages -d ./dist/soccer-tracker"
   },
   "private": true,
   "dependencies": {
