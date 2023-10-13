@@ -1,0 +1,3 @@
+<nav class="nav nav-pills nav-fill bg-gray">
+    <a class="nav-link" id="{{country}}Select" routerLinkActive="active" [routerLink]="['country', country]" *ngFor="let country of countries; let isFirst=first">{{country | titlecase}}</a>    
+</nav>

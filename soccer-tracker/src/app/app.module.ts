@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CountrySelectorComponent } from './country-selector/country-selector.component';
+import { CountryResultsComponent } from './country-results/country-results.component';
+import { Routes, RouterModule } from '@angular/router';
+
+const routes: Routes = [
+  {path: 'country/:country', component: CountryResultsComponent }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CountrySelectorComponent,
+    CountryResultsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    RouterModule.forRoot(routes, {useHash: true}),
   ],
   providers: [],
   bootstrap: [AppComponent]
