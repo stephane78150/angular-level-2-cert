@@ -1,42 +1,36 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SoccerCountry, SoccerTopLeague, TeamResult } from '../app.model';
+import { Component, OnInit } from '@angular/core';
+import { SoccerTopLeague, TeamResult, TeamResults, TeamResultsResponse } from '../app.model';
 import { CountryResultsService } from './country-results.service';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { NEVER, Observable, map, of, shareReplay, startWith, switchMap } from 'rxjs';
+import { ApiLoadingStatus, NOT_YET_LOADED, toLoadingStatus, toResultData } from '../api.utils';
 
 @Component({
   selector: 'app-country-results',
   templateUrl: './country-results.component.html',
   styleUrls: ['./country-results.component.css']
 })
-export class CountryResultsComponent implements OnInit, OnDestroy {
-  public results: TeamResult[] = [];  
-  private selectedCountry: SoccerCountry = null!;
-  public selectedTopLeague: SoccerTopLeague = null!;
-  private subSelectedCountry: Subscription | null = null;
+export class CountryResultsComponent implements OnInit {  
+  public leagueResults$ : Observable<TeamResults> = NEVER;
+  public selectedTopLeague$: Observable<SoccerTopLeague> = NEVER;
+  public loadingStatus$ : Observable<ApiLoadingStatus> = NOT_YET_LOADED;
+  private apiResponse$: Observable<TeamResultsResponse> = NOT_YET_LOADED;    
 
   public constructor(private service: CountryResultsService, private route: ActivatedRoute) {    
   }
 
   public ngOnInit(): void {
-    this.SetSelectedCountry(this.route.snapshot.params['country']);
-    this.subSelectedCountry = this.route.params.subscribe(params => {
-      this.SetSelectedCountry(params['country']);
-    })
-  }
-
-  public ngOnDestroy(): void {    
-    this.subSelectedCountry?.unsubscribe();
-  }
-  
-
-  private SetSelectedCountry(selectedCountry: SoccerCountry): void {
-    this.selectedCountry = selectedCountry;
-    this.selectedTopLeague = this.service.GetTopLeague(selectedCountry);
-    this.results = this.service.GetResults(this.selectedTopLeague);
-    console.log('Set selected', this.selectedCountry, this.selectedTopLeague, this.results);
+    const selectedCountry$ = this.route.params.pipe(map(params => params['country']), startWith(() => this.route.snapshot.params['country']));
+    this.selectedTopLeague$ = selectedCountry$.pipe(map(country => this.service.GetTopLeague(country)));
+    this.apiResponse$ = this.selectedTopLeague$.pipe(switchMap( (topLeague) => {
+      if (topLeague == null) {
+        return of('not yet loaded' as const);
+      }
+      const season = this.service.GetCurrentSeason();
+      return this.service.GetResults(topLeague, season);
+    }), shareReplay(1))
+    this.loadingStatus$ = this.apiResponse$.pipe(toLoadingStatus);
+    this.leagueResults$ = this.apiResponse$.pipe(toResultData);
   }
 
 }
-
-
