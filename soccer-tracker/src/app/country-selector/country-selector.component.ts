@@ -1,4 +1,4 @@
-import type { SoccerCountry } from '../app.model';
+import type { SoccerCountry } from '../shared/app.model';
 
 import { Component } from '@angular/core';
 

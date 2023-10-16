@@ -1,1 +1,33 @@
-<p>team-results works!</p>
+
+<div class="card my-5">
+    <div class="card-header">
+        <span class="display-6">Results for team <span class="text-primary">{{selectedTeamId$ | async}}</span></span>
+        <a class="btn btn-xl btn-primary float-end mt-1" [routerLink]="['/country', selectedCountry$ | async, 'top-league']">Back to <em>{{selectedCountry$ | async}}</em> league results</a>
+    </div>    
+    <div class="card-body">
+        <table class="table table-striped table-hover border">
+            <thead>
+                <tr>
+                    <th title="Home team logo"></th>
+                    <th>Home team</th>
+                    <th>Home score</th>
+                    <th>Away score</th>
+                    <th>Away team</th>
+                    <th title="Away team logo"></th>                
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let match of lastSoccerMatches$| async">
+                    <td><img [src]="match.homeTeam.logo" class="tiny-team-logo"></td>
+                    <td>{{match.homeTeam.name}}</td>
+                    <td>{{match.homeScore}}</td>
+                    <td>{{match.awayScore}}</td>
+                    <td>{{match.awayTeam.name}}</td>
+                    <td><img [src]="match.awayTeam.logo" class="tiny-team-logo"></td>
+                </tr>
+            </tbody>        
+        </table>
+    </div>
+</div>
+
+

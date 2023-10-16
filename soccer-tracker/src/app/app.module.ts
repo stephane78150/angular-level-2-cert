@@ -4,9 +4,8 @@ import { AppComponent } from './app.component';
 import { CountrySelectorComponent } from './country-selector/country-selector.component';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [
+const routes: Routes = [  
   {path: 'country', loadChildren: () => import('./country-results/country-results.module').then(m => m.CountryResultsModule)},
-  {path: 'team', loadChildren: () => import('./team-results/team-results.module').then(m => m.TeamResultsModule)},
 ];
 
 @NgModule({

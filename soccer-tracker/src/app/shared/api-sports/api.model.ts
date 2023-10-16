@@ -1,3 +1,5 @@
+import { TeamSummary } from "src/app/team-results/team.model";
+
 export type ApiTeam = {
     id: number;
     name: string;
@@ -10,16 +12,21 @@ export type ApiVenue = {
     id: number;
     name: string;
 }  
+export type ApiLeagueDescription = Readonly<{
+    id: number;
+    name: string;
+    country: string;
+    logo: string;
+}>
+
+export type ApiLeagueDescriptionWithStandings = ApiLeagueDescription & Readonly<{
+    standings: ReadonlyArray<ReadonlyArray<ApiTeamStanding>>
+}>;
   
 export type ApiLeague = Readonly<{
-    league: {
-        id: number;
-        name: string;
-        country: string;
-        logo: string;
-        standings: ReadonlyArray<ReadonlyArray<ApiTeamStanding>>
-    }
-}>
+    league: ApiLeagueDescriptionWithStandings    
+}>;
+
 
 export type ApiTeamStanding = Readonly<{
     rank: number;
@@ -37,12 +44,25 @@ export type ApiTeamSummary = Readonly<{
     logo: string;
 }>
 
-
 export type ApiGameStats = Readonly<{
     played: number;
     win: number;
     draw: number;
     lose: number;
+}>
+
+export type ApiFixtureDescription = Readonly<{
+    fixture: any;
+    league: ApiLeagueDescription;
+    teams: {
+        home: ApiTeamSummary,
+        away: ApiTeamSummary,
+    };
+    goals: {
+        home: number;
+        away: number;
+    };
+    score: any;
 }>
   
 export type ApiPaging = Readonly<{

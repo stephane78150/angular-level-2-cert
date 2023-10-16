@@ -1,3 +1,4 @@
+
 export type League = Readonly<{
     id: number;
     name: string;
@@ -14,5 +15,6 @@ export type TeamResult = {
     goalDifference: number;
     points: number;
 }
+
 
 export type TeamResults = ReadonlyArray<TeamResult>;

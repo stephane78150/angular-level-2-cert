@@ -1,15 +1,14 @@
-import type { ApiLeague, ApiResponse, ApiTeamStanding } from './api.model';
-import type { Response } from '../api.model';
-import type { SoccerCountry} from '../app.model';
+import type { ApiLeague, ApiResponse, ApiTeamStanding } from 'shared/api-sports/api.model';
+import type { ResponseOrStatus } from 'shared/api-status.model';
+import type { SoccerCountry} from 'shared/app.model';
 import type { TeamResults, League, TeamResult } from './league.model';
 
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, share, shareReplay, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { withLoadingAndErrorStatus } from './api.utils';
-import { ApiBaseService } from './api-base.service';
+import { withLoadingAndErrorStatus } from 'api/api.utils';
+import { ApiBaseService } from 'api/api-base.service';
 import { first } from 'lodash-es';
-
 
 @Injectable()
 export class LeagueService extends ApiBaseService {
@@ -41,8 +40,7 @@ export class LeagueService extends ApiBaseService {
     return (today.getMonth() <= 6) ? (year - 1) : year;
   }
 
-  public GetAllTeamResults(league: League, season: number): Observable<Response<TeamResults>> {
-    console.log("requesting", league, season);    
+  public GetAllTeamResults(league: League, season: number): Observable<ResponseOrStatus<TeamResults>> {    
     const response$ = this.http.get<ApiResponse<ApiLeague>>('https://v3.football.api-sports.io/standings', {
       headers: super.GetApiHeaders(),
       params: {
@@ -50,15 +48,18 @@ export class LeagueService extends ApiBaseService {
         season
       }
     }).pipe(
+        tap(() => {
+          console.log("requesting", league, season);    
+        }),
         map(r => first(r.response)?.league?.standings.flat() ?? []),
         map(standings => standings.map(standing => this.GetTeamResult(standing as ApiTeamStanding))), 
         withLoadingAndErrorStatus,
+        share(),
       );
     return response$;
   }
 
   private GetTeamResult(teamStanding: ApiTeamStanding): TeamResult {
-    console.log('Get result for team', teamStanding);
     const result: TeamResult ={
       teamId: teamStanding.team.id,
       teamName: teamStanding.team.name,
@@ -69,8 +70,7 @@ export class LeagueService extends ApiBaseService {
       games: teamStanding.all.played,
       wins: teamStanding.all.win,
       losses: teamStanding.all.lose,      
-    };
-    console.log('Got result for team', result);
+    };    
     return result;
   }       
 }

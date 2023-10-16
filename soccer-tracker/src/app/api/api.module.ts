@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LeagueService } from './league.service';
+import { LeagueService } from '../country-results/league/league.service';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -12,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
   ],
   providers: [
-    LeagueService,
   ]
 })
 export class ApiModule { }
