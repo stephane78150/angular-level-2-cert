@@ -1,4 +1,4 @@
-# SoccerTracker
+# Soccer Tracker
 
 ## Context
 I came from a React background, and I have used a lot typescript & Rx.JS before.
