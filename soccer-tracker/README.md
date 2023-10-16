@@ -1,10 +1,10 @@
 # SoccerTracker
 
-#### Context
+## Context
 I came from a React background, and I have used a lot typescript & Rx.JS before.
 
 ## Routing & Lazy loading
-I implemented code splitting as an exercise, of course for a such a small it does not bring much benefit.
+I implemented code splitting as an exercise, of course for a such a small application it does not bring much benefit.
 The typings provided for sports API are shared and therefore I used the `import type` feature of typescript so that they do not have any effects on the code splitting (those imports will disappear during compilation).
 
 Routing is implemened by using nested children routes, between different lazy loaded module. The current selection state is stored in URL.
