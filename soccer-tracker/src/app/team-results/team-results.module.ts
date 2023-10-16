@@ -7,7 +7,7 @@ import { TeamService } from './team.service';
 import { LastSoccerMatchesResolver } from './team-results.resolve';
 
 const routes: Routes = [
-  {path: ':teamId', component: TeamResultsComponent, resolve: {
+  {path: ':teamId/:teamName', component: TeamResultsComponent, resolve: {
     lastMatches: LastSoccerMatchesResolver,
   } }
 ];

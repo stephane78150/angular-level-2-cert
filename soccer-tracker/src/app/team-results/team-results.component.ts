@@ -11,6 +11,7 @@ import { SoccerCountry } from 'shared/app.model';
 })
 export class TeamResultsComponent implements OnInit {
   public selectedTeamId$: Observable<number> = NEVER;
+  public selectedTeamName$: Observable<string> = NEVER;
   public selectedCountry$: Observable<SoccerCountry> = NEVER;
   public lastSoccerMatches$: Observable<LastSoccerMatches> = NEVER;
   
@@ -19,6 +20,7 @@ export class TeamResultsComponent implements OnInit {
   
   public ngOnInit(): void {
     this.selectedTeamId$ = this.route.params.pipe(map(params => params['teamId'] as number), startWith(this.route.snapshot.params['teamId'] as number));    
+    this.selectedTeamName$ = this.route.params.pipe(map(params => params['teamName'] as string), startWith(this.route.snapshot.params['teamName'] as string));    
     this.selectedCountry$ = this.route.parent!.parent!.params.pipe(map(params => params['country'] as SoccerCountry), startWith(this.route.parent!.parent!.snapshot.params['country'] as SoccerCountry));
     this.lastSoccerMatches$ = this.route.data.pipe(map(data => data["lastMatches"] as LastSoccerMatches));
   }

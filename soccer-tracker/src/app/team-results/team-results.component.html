@@ -1,7 +1,7 @@
 
 <div class="card my-5">
     <div class="card-header">
-        <span class="display-6">Results for team <span class="text-primary">{{selectedTeamId$ | async}}</span></span>
+        <span class="display-6">Last 10 matches for team <span class="text-primary">{{selectedTeamName$ | async}}</span></span>
         <a class="btn btn-xl btn-primary float-end mt-1" [routerLink]="['/country', selectedCountry$ | async, 'top-league']">Back to <em>{{selectedCountry$ | async}}</em> league results</a>
     </div>    
     <div class="card-body">

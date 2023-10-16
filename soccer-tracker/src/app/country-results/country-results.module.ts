@@ -7,9 +7,10 @@ import { LeagueService } from './league/league.service';
 import { TopLeagueResultsComponent } from './top-league-results/top-league-results.component';
 
 const routes: Routes = [
-  {path: ':country', component: CountryResultsComponent, children: [
+  {path: ':country', component: CountryResultsComponent, children: [    
     {path: 'team', loadChildren: () => import('team-results/team-results.module').then(m => m.TeamResultsModule)},
     {path: 'top-league', component: TopLeagueResultsComponent},
+    {path: '**', redirectTo: 'top-league'},
   ] },  
 ];
 @NgModule({

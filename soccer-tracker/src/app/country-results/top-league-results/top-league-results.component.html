@@ -19,7 +19,7 @@
             <tbody>
                 <tr *ngFor="let result of leagueResults$ | async">
                     <td><img [src]="result.teamLogo" class="tiny-team-logo" alt="team logo"></td>
-                    <td><a [routerLink]="['/country', selectedCountry$ | async, 'team', result.teamId]">{{result.teamName}}</a> </td>
+                    <td><a [routerLink]="['/country', selectedCountry$ | async, 'team', result.teamId, result.teamName]">{{result.teamName}}</a> </td>
                     <td>{{result.games}}</td>
                     <td>{{result.wins}}</td>
                     <td>{{result.losses}}</td>
