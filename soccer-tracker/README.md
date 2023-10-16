@@ -16,8 +16,10 @@ Routing is implemened by using nested children routes, between different lazy lo
     - display a spinner during load
     - displays an error message if the HTTP query failed
     - display a message if nothing is selected yet, and the http query have not been sent (unlikely edge case)
+      
 To manage those statuses, I used a set of custom operators defined in `src/app/api/api.utils.ts`, while this make the code quite complex, it also provides some resiliency in case the API becomes very slow or randomly returns errors.
-For example, you can play with the browser block url feature, to check that when an http query fails, a error banner is displayedn and this the does prevent subsequent queries from working (this is a danger from observable as they tend to complete on first error when not catched).
+
+For example, you can play with the browser block url feature, to check that when an http query fails, an error banner is displayed and this the does prevent subsequent queries from working (this is a danger from observable as they tend to complete on first error when not catched).
 
 ## Last matches
 
