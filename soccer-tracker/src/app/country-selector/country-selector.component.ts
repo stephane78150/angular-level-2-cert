@@ -1,5 +1,6 @@
+import type { SoccerCountry } from '../app.model';
+
 import { Component } from '@angular/core';
-import { SoccerCountry } from '../app.model';
 
 @Component({
   selector: 'app-country-selector',

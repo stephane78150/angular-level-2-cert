@@ -1,10 +1,5 @@
 import { Observable, catchError, delay, filter, map, of, startWith } from "rxjs";
-
-export type ResponseStatus = 'loading' | 'not yet loaded' | 'error';
-
-export type LoadingStatus = ResponseStatus | 'loaded';
-
-export type Response<T> = T | ResponseStatus;
+import type {Response, ResponseStatus, LoadingStatus} from '../api.model';
 
 export const NOT_YET_LOADED = of('not yet loaded' as const);
 

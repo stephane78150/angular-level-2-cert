@@ -1,11 +1,15 @@
+import type { ApiLeague, ApiResponse, ApiTeamStanding } from './api.model';
+import type { Response } from '../api.model';
+import type { SoccerCountry} from '../app.model';
+import type { TeamResults, League, TeamResult } from './league.model';
+
 import { Injectable } from '@angular/core';
-import { League, SoccerCountry, TeamResult, TeamResults, TeamResultsResponse} from '../app.model';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { withLoadingAndErrorStatus } from './api.utils';
-import { ApiResponse, ApiLeague, ApiTeamStanding } from './api.model';
 import { ApiBaseService } from './api-base.service';
-import { first } from 'lodash-es'
+import { first } from 'lodash-es';
+
 
 @Injectable()
 export class LeagueService extends ApiBaseService {
@@ -37,7 +41,7 @@ export class LeagueService extends ApiBaseService {
     return (today.getMonth() <= 6) ? (year - 1) : year;
   }
 
-  public GetAllTeamResults(league: League, season: number): Observable<TeamResultsResponse> {
+  public GetAllTeamResults(league: League, season: number): Observable<Response<TeamResults>> {
     console.log("requesting", league, season);    
     const response$ = this.http.get<ApiResponse<ApiLeague>>('https://v3.football.api-sports.io/standings', {
       headers: super.GetApiHeaders(),
@@ -70,3 +74,4 @@ export class LeagueService extends ApiBaseService {
     return result;
   }       
 }
+
