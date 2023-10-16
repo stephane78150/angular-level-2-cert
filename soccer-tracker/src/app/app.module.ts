@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { CountrySelectorComponent } from './country-selector/country-selector.component';
 import { CountryResultsComponent } from './country-results/country-results.component';
 import { Routes, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { CountryResultsModule } from './country-results/country-results.module';
 
 const routes: Routes = [
   {path: 'country/:country', component: CountryResultsComponent }
@@ -14,11 +14,10 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     CountrySelectorComponent,
-    CountryResultsComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
+    CountryResultsModule,
     RouterModule.forRoot(routes, {useHash: true}),
   ],
   providers: [],

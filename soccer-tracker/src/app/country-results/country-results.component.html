@@ -1,7 +1,7 @@
 
 <div class="card my-5">
     <div class="card-header">
-        <span class="display-6">Results for <span class="text-primary">{{selectedTopLeague$ | async}}</span></span>
+        <span class="display-6">Results for <span class="text-primary">{{(selectedTopLeague$ | async)?.name}}</span></span>
     </div>
     <div class="card-body" [ngSwitch]="loadingStatus$ | async">        
         <table class="table table-striped table-hover border" *ngSwitchCase="'loaded'">
@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let result of leagueResults$ | async">
-                    <td></td>
+                    <td><img [src]="result.teamLogo" class="tiny-team-logo" alt="team logo"></td>
                     <td>{{result.teamName}}</td>
                     <td>{{result.games}}</td>
                     <td>{{result.wins}}</td>

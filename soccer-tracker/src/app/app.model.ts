@@ -1,11 +1,16 @@
-import { ApiResponse } from "./api.utils";
+import { Response } from "./api/api.utils";
 
 export type SoccerCountry = 'england' | 'spain' | 'germany' | 'france' | 'italy';
 
-export type SoccerTopLeague = 'Premier League' | 'La Liga' | 'Ligue 1' | 'Bundesliga' | 'Serie A';
+export type League = Readonly<{
+    id: number;
+    name: string;
+}>
 
 export type TeamResult = {
+    teamId: number;
     teamName: string;
+    teamLogo: string;
     games: number;
     wins: number;
     losses: number;
@@ -16,5 +21,5 @@ export type TeamResult = {
 
 export type TeamResults = ReadonlyArray<TeamResult>;
 
-export type TeamResultsResponse = ApiResponse<TeamResults>;
+export type TeamResultsResponse = Response<TeamResults>;
 
