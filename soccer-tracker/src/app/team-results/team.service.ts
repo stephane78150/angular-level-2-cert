@@ -1,11 +1,9 @@
 import type {LastSoccerMatches, SoccerMatch} from './team.model'
-import type {ResponseOrStatus} from '../shared/api-status.model'
 import type { ApiResponse, ApiFixtureDescription } from 'shared/api-sports/api.model';
 
 import { HttpClient } from "@angular/common/http";
 import { ApiBaseService } from "api/api-base.service";
-import { Observable, first, map } from "rxjs";
-import { withLoadingAndErrorStatus } from 'api/api.utils';
+import { Observable, map } from "rxjs";
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -14,7 +12,7 @@ export class TeamService extends ApiBaseService {
         super();
     }   
 
-    public GetLastGames(teamId: number, numberOfGames: number = 10): Observable<LastSoccerMatches> {
+    public GetLastGames(teamId: number, numberOfGames = 10): Observable<LastSoccerMatches> {
       console.log('Get last ', numberOfGames, ' games for team ', teamId)
     
       const response$ = this.httpClient.get<ApiResponse<ApiFixtureDescription>>('https://v3.football.api-sports.io/fixtures', {

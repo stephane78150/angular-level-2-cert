@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build -watch --configuration development",
     "predeploy": "npm run build -- --base-href 'https://stephane78150.github.io/angular-level-2-cert/'",
-    "deploy": "gh-pages -d ./dist/soccer-tracker"
+    "deploy": "gh-pages -d ./dist/soccer-tracker",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -27,9 +28,17 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.5",
+    "@angular-eslint/builder": "16.2.0",
+    "@angular-eslint/eslint-plugin": "16.2.0",
+    "@angular-eslint/eslint-plugin-template": "16.2.0",
+    "@angular-eslint/schematics": "16.2.0",
+    "@angular-eslint/template-parser": "16.2.0",
     "@angular/cli": "^16.2.5",
     "@angular/compiler-cli": "^16.2.0",
     "@types/lodash-es": "^4.17.9",
+    "@typescript-eslint/eslint-plugin": "5.62.0",
+    "@typescript-eslint/parser": "5.62.0",
+    "eslint": "^8.49.0",
     "typescript": "~5.1.3"
   }
 }

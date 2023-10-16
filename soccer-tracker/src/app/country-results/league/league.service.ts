@@ -4,7 +4,7 @@ import type { SoccerCountry} from 'shared/app.model';
 import type { TeamResults, League, TeamResult } from './league.model';
 
 import { Injectable } from '@angular/core';
-import { Observable, map, share, shareReplay, tap } from 'rxjs';
+import { Observable, map, share, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { withLoadingAndErrorStatus } from 'api/api.utils';
 import { ApiBaseService } from 'api/api-base.service';

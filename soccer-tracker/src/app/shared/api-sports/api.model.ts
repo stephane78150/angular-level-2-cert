@@ -1,5 +1,3 @@
-import { TeamSummary } from "src/app/team-results/team.model";
-
 export type ApiTeam = {
     id: number;
     name: string;
@@ -52,7 +50,7 @@ export type ApiGameStats = Readonly<{
 }>
 
 export type ApiFixtureDescription = Readonly<{
-    fixture: any;
+    fixture: unknown;
     league: ApiLeagueDescription;
     teams: {
         home: ApiTeamSummary,
@@ -62,7 +60,7 @@ export type ApiFixtureDescription = Readonly<{
         home: number;
         away: number;
     };
-    score: any;
+    score: unknown;
 }>
   
 export type ApiPaging = Readonly<{
@@ -72,7 +70,7 @@ export type ApiPaging = Readonly<{
   
 export type ApiParameters = Readonly<Record<string, string>>
   
-export type ApiError = any; // error type is not used yet anyway
+export type ApiError = unknown; // error type is not used yet anyway
   
 export type ApiResponse<T> = Readonly<{
     paging: ApiPaging;

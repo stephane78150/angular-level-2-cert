@@ -1,9 +1,8 @@
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { LastSoccerMatches, SoccerMatch } from "./team.model";
+import { LastSoccerMatches } from "./team.model";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { TeamService } from "./team.service";
-import { toResultData } from "api/api.utils";
 
 @Injectable()
 export class LastSoccerMatchesResolver implements Resolve<LastSoccerMatches> {

@@ -18,12 +18,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let match of lastSoccerMatches$| async">
-                    <td><img [src]="match.homeTeam.logo" class="tiny-team-logo"></td>
+                    <td><img [src]="match.homeTeam.logo" class="tiny-team-logo"  alt="team logo"></td>
                     <td>{{match.homeTeam.name}}</td>
                     <td>{{match.homeScore}}</td>
                     <td>{{match.awayScore}}</td>
                     <td>{{match.awayTeam.name}}</td>
-                    <td><img [src]="match.awayTeam.logo" class="tiny-team-logo"></td>
+                    <td><img [src]="match.awayTeam.logo" class="tiny-team-logo"  alt="team logo"></td>
                 </tr>
             </tbody>        
         </table>

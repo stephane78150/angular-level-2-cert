@@ -22,7 +22,7 @@ export function toResultData<T>(response$: Observable<ResponseOrStatus<T>>): Obs
 
 export function withLoadingAndErrorStatus<T>(response$: Observable<T>): Observable<ResponseOrStatus<T>> {
     return response$.pipe(
-        catchError( _ => of('error' as const)),
+        catchError( () => of('error' as const)),
         delay(1500), // to test loading bar 
         startWith('loading' as const)
     );
