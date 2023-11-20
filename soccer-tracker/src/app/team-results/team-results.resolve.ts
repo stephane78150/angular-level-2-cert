@@ -4,7 +4,9 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { TeamService } from "./team.service";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class LastSoccerMatchesResolver implements Resolve<LastSoccerMatches> {
     constructor(private teamService: TeamService) {
         

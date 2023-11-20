@@ -2,16 +2,22 @@ import type { LoadingStatus, ResponseOrStatus } from 'shared/api-status.model';
 import type { TeamResults, League } from '../league/league.model';
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { NOT_YET_LOADED, toLoadingStatus, toResultData } from 'api/api.utils';
 import { Observable, NEVER, map, startWith, switchMap, of, shareReplay } from 'rxjs';
 import { LeagueService } from '../league/league.service';
 import { SoccerCountry } from 'shared/app.model';
+import { CommonModule } from '@angular/common';
+import { ApiModule } from 'api/api.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
+  standalone: true,
   selector: 'app-top-league-results',
   templateUrl: './top-league-results.component.html',
+  imports: [CommonModule, RouterModule, HttpClientModule],
+  providers: [LeagueService],
 })
 export class TopLeagueResultsComponent implements OnInit {
   public leagueResults$ : Observable<TeamResults> = NEVER;

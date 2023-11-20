@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { NEVER, Observable, map, startWith } from 'rxjs';
 import { LastSoccerMatches } from './team.model';
 import { SoccerCountry } from 'shared/app.model';
+import { CommonModule } from '@angular/common';
+import { LastSoccerMatchesResolver } from './team-results.resolve';
+import { TeamService } from './team.service';
 
 @Component({
+  standalone: true,
   selector: 'app-team-results',
   templateUrl: './team-results.component.html',
-  styleUrls: ['./team-results.component.css']
+  styleUrls: ['./team-results.component.css'],
+  imports: [RouterModule, CommonModule],
 })
 export class TeamResultsComponent implements OnInit {
   public selectedTeamId$: Observable<number> = NEVER;

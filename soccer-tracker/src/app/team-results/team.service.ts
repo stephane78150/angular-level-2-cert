@@ -6,7 +6,7 @@ import { ApiBaseService } from "api/api-base.service";
 import { Observable, map } from "rxjs";
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class TeamService extends ApiBaseService {
     constructor(private httpClient: HttpClient) {
         super();
